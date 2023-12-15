@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Controls</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 14px;
+            margin: 5px;
+            border: 1px solid #fff;
+            border-radius: 20px;
+            box-sizing: border-box;
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Music Controls</h1>
+
+    <form action="/play" method="get">
+        <input type="hidden" name="song" value="{{ request.args.get('song') }}">
+        <button type="submit">Play</button>
+    </form>
+
+    <form action="/stop" method="get">
+        <button type="submit">Stop</button>
+    </form>
+
+    <form action="/pause" method="get">
+        <button type="submit">Pause</button>
+    </form>
+
+    <form action="/resume" method="get">
+        <button type="submit">Resume</button>
+    </form>
+
+    <p>{{ status }}</p>
+
+    <!-- Add a link to navigate back to the main page -->
+    <a href="/">Back to Main Page</a>
+</body>
+</html>

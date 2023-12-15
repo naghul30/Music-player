@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Music Player</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            font-size: 14px;
+            margin: 5px;
+            border: 1px solid #fff;
+            border-radius: 10px;
+            box-sizing: border-box;
+            background-color: #000;
+            color: #fff;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+            border: 1px solid #fff;
+            padding: 8px;
+            border-radius: 10px;
+            background-color: #000;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Web Music Player</h1>
+
+    <!-- Modify the form to allow users to input the directory path -->
+    <form action="/load" method="post">
+        <label for="directory">Load Directory:</label>
+        <input type="text" id="directory" name="directory" placeholder="Enter directory path">
+        <button type="submit">Load</button>
+    </form>
+
+    <ul>
+        {% for track in tracks %}
+            <li>{{ track }}</li>
+        {% endfor %}
+    </ul>
+
+    <form action="/play" method="post" onsubmit="return playSong()">
+        <label for="selected_song">Select Song:</label>
+        <select id="selected_song" name="selected_song">
+            {% for track in tracks %}
+                <option value="{{ track }}">{{ track }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Play</button>
+    </form>
+
+    <form action="/stop" method="post">
+        <button type="submit">Stop</button>
+    </form>
+
+    <form action="/pause" method="post">
+        <button type="submit">Pause</button>
+    </form>
+
+    <form action="/resume" method="post">
+        <button type="submit">Resume</button>
+    </form>
+    
+
+    <script>
+        function playSong() {
+            var selectedSong = document.getElementById("selected_song").value;
+            if (!selectedSong) {
+                alert("Please select a song before playing.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
